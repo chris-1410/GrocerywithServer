@@ -9,11 +9,12 @@ export const NavBar = ({size, setShow}) => {
           Grocery Store
         </span>
         <div className="cart" onClick={()=>setShow(false)}>
-          <span>
+          <span className="cart-span">
             <i className="fa-sharp fa-solid fa-cart-plus"></i>
           </span>
           <span>{size}</span>
         </div>
+        <button type="button" className="btn-logout">Logout</button>
       </div>
     </nav>
   );

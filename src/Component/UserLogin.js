@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "../Styles/UserLogin.css";
 
-
 function UserLogin() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const url = "http://localhost:9000/user-login";
   const [data, setData] = useState({
     email: "",
@@ -25,7 +24,7 @@ function UserLogin() {
       email: data.email,
       password: data.password,
     }).then((res) => {
-      if (res.data.sucess == "True") {
+      if (res.data.success == "True") {
         let role = res.data.role;
         alert("Logged in Successfully");
         navigate("/navbarmain");

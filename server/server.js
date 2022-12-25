@@ -2,24 +2,32 @@ var sql = require("mssql");
 const bodyParser = require("body-parser");
 var cors = require("cors");
 
-
 // connect to server
 var express = require("express");
 var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-
 // config for your database
-const sqlConfig = {
-  user: "ADF_SQL_server_Training_Chris",
-  password: "Rathna@1964",
-  server: "sqlserver--adf--training--chris.database.windows.net",
-  database: "SQL-DB-adf-training-chris",
+var sqlConfig = {
+  user: "Narendra",
+  password: "Naren@123",
+  server: "sql-server-jman-narendra.database.windows.net",
+  database: "sql-db-jman-narendra",
   options: {
     encrypt: true, // for azure
   },
 };
+
+// const sqlConfig = {
+//   user: "ADF_SQL_server_Training_Chris",
+//   password: "Rathna@1964",
+//   server: "sqlserver--adf--training--chris.database.windows.net",
+//   database: "SQL-DB-adf-training-chris",
+//   options: {
+//     encrypt: true, // for azure
+//   },
+// };
 
 // display all available products to user
 app.get("/products-list", function (req, res) {
@@ -33,7 +41,6 @@ app.get("/products-list", function (req, res) {
       });
   })();
 });
-
 
 //display all received orders to admin
 app.get("/orders-list", function (req, res) {
@@ -69,7 +76,6 @@ app.put("/update-quantity", function (req, res) {
   })();
 });
 
-
 //new user register
 app.post("/user-register", function (req, res) {
   res.setHeader(
@@ -90,7 +96,6 @@ app.post("/user-register", function (req, res) {
       );
   })();
 });
-
 
 //user login verification
 app.post("/user-login", function (req, res) {
@@ -113,12 +118,12 @@ app.post("/user-login", function (req, res) {
                 console.log(result);
                 if (passdb == password) {
                   res.send({
-                    sucess: "True",
+                    success: "True",
                     password: result.recordset[0].password,
                   });
                 } else {
                   res.send({
-                    sucess: "False",
+                    success: "False",
                   });
                 }
               });
@@ -171,12 +176,12 @@ app.post("/admin-login", function (req, res) {
                 console.log(result.recordset[0]);
                 if (passdb == password) {
                   res.send({
-                    sucess: "True",
+                    success: "True",
                     password: result.recordset[0].password,
                   });
                 } else {
                   res.send({
-                    sucess: "False",
+                    success: "False",
                   });
                 }
               });

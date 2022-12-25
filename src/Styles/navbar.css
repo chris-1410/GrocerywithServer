@@ -10,7 +10,7 @@ nav {
 }
 
 .nav-box {
-  width: 80%;
+  width: 95%;
   margin: auto;
   display: flex;
   align-items: center;
@@ -26,20 +26,27 @@ nav {
 .cart {
   cursor: pointer;
   float: right;
-  /* position: relative;
-  right: 20px;
-  top: 10px; */
+}
+.cart-span {
+  margin-left: 62.5rem;
 }
 .cart span:nth-child(1) {
   font-size: 2rem;
-  color: white;
+  color: black;
 }
 .cart span:nth-child(2) {
   padding: 0 3px;
-  background-color: #FD292F;
+  background-color: #fd292f;
   color: white;
   font-weight: bolx;
   border-radius: 5px;
   position: relative;
   top: -15px;
+}
+.btn-logout {
+  width: 70px;
+  height: 35px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
 }

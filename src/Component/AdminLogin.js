@@ -22,7 +22,7 @@ function AdminLogin() {
       email: data.email,
       password: data.password,
     }).then((res) => {
-      if (res.data.sucess == "True") {
+      if (res.data.success == "True") {
         let role = res.data.role;
         alert("Logged in Successfully");
         //navigate("/Admin");

@@ -13,7 +13,7 @@ export const Home = () => {
           </a>
 
           <div className="signup-login">
-            <a className="signin-nav" href="/chris">
+            <a className="signin-nav" href="/admin">
               Admin
             </a>
 
@@ -24,22 +24,5 @@ export const Home = () => {
         </nav>
       </div>
     </div>
-
-    // <div>
-    //
-    //   <hr />
-    //   <div className="list-div">
-    //     <ul>
-    //       <li>Home</li>
-    //       <li>Products</li>
-    //       <li>Admin</li>
-    //       <li>User</li>
-    //     </ul>
-    //   </div>
-    //   {/* <div className="login-div">
-    //     <button className="btn-admin">Admin</button>
-    //     <button className="btn-user">User</button>
-    //   </div> */}
-    // </div>
   );
 };
