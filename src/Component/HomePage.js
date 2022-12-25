@@ -13,11 +13,11 @@ export const Home = () => {
           </a>
 
           <div className="signup-login">
-            <a className="signin-nav" href="">
+            <a className="signin-nav" href="/chris">
               Admin
             </a>
 
-            <a className="login-nav" href="">
+            <a className="login-nav" href="/userLogin">
               User
             </a>
           </div>
