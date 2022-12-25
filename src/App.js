@@ -1,9 +1,9 @@
 import React from "react";
 import { Home } from "./Component/HomePage";
-import AdminRegister from "./Component/AdminRegister";
-import AdminLogin from "./Component/AdminLogin";
-import UserRegister from "./Component/UserRegister";
-import UserLogin from "./Component/UserLogin";
+// import AdminRegister from "./Component/AdminRegister";
+// import AdminLogin from "./Component/AdminLogin";
+// import UserRegister from "./Component/UserRegister";
+// import UserLogin from "./Component/UserLogin";
 import NavBarMain from "./Component/NavBarMain";
 
 function App() {

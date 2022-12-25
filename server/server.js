@@ -48,10 +48,6 @@ app.get("/orders-list", function (req, res) {
   })();
 });
 
-
-//post confirm orders into orders table
-
-
 //put (update) ProdtuctQuantity by admin
 app.put("/update-quantity", function (req, res) {
   res.setHeader(
@@ -67,7 +63,7 @@ app.put("/update-quantity", function (req, res) {
         function (err, recordset) {
           console.log(recordset);
           if (err) console.log(err);
-          res.send("product quantity updated");
+          res.send("Product quantity updated Check in DB");
         }
       );
   })();

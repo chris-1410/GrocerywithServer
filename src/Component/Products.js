@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 // import list from "../data";
 import { Cards } from "./Card";
 import axios from "axios";
+import "../Styles/Products.css";
 
 export const Products = ({ handleClick }) => {
 

@@ -16,9 +16,9 @@ const NavBarMain = () => {
   const handleChange = (item, d) => {
     const ind = cart.indexOf(item);
     const arr = cart;
-    arr[ind].price += d;
+    arr[ind].num += d;
 
-    if (arr[ind].amount === 0) arr[ind].amount = 1;
+    if (arr[ind].num === 0) arr[ind].num = 1;
     setCart([...arr]);
   };
 
