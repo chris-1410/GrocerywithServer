@@ -11,13 +11,15 @@ app.use(bodyParser.json());
 
 
 // config for your database
-var sqlConfig = {
-  user: "Narendra",
-  password: "Naren@123",
-  server: "sql-server-jman-narendra.database.windows.net",
-  database: "sql-db-jman-narendra",
+const sqlConfig = {
+  user: "ADF_SQL_server_Training_Chris",
+  password: "Rathna@1964",
+  server: "sqlserver--adf--training--chris.database.windows.net",
+  database: "SQL-DB-adf-training-chris",
+  options: {
+    encrypt: true, // for azure
+  },
 };
-
 
 // display all available products to user
 app.get("/products-list", function (req, res) {
@@ -87,7 +89,7 @@ app.post("/user-register", function (req, res) {
         function (err, recordset) {
           console.log(recordset);
           if (err) console.log(err);
-          res.send("new user registered");
+          res.send("New User Registered Check in DB");
         }
       );
   })();
@@ -146,7 +148,7 @@ app.post("/admin-register", function (req, res) {
         function (err, recordset) {
           console.log(recordset);
           if (err) console.log(err);
-          res.send("new admin registered");
+          res.send("New Admin Registered Check in DB");
         }
       );
   })();
