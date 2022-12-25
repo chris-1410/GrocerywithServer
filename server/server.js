@@ -27,7 +27,7 @@ app.get("/products-list", function (req, res) {
     let pool = await sql.connect(sqlConfig);
     let result = await pool
       .request()
-      .query("select * from Products", function (err, recordset) {
+      .query("select * from producttable", function (err, recordset) {
         if (err) console.log(err);
         res.send(recordset.recordset);
       });

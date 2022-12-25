@@ -4,6 +4,7 @@ import { Cards } from "./Card";
 import axios from "axios";
 
 export const Products = ({ handleClick }) => {
+
   const [data, setData] = useState([]);
 
   const fetchData = async () => {

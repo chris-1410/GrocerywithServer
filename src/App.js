@@ -10,10 +10,10 @@ function App() {
   return (
     <React.Fragment>
       <Home />
-      <AdminRegister />
+      {/* <AdminRegister />
       <AdminLogin />
       <UserRegister />
-      <UserLogin />
+      <UserLogin /> */}
       <NavBarMain />
     </React.Fragment>
   );
