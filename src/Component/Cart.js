@@ -4,7 +4,7 @@ import "../Styles/cart.css";
 const Cart = ({ cart, setCart, handleChange }) => {
   // Hooks
   const [price, setPrice] = useState(0);
-
+  
   const handleRemove = (id) => {
     const arr = cart.filter((item) => item.id !== id);
     setCart(arr);
@@ -21,22 +21,52 @@ const Cart = ({ cart, setCart, handleChange }) => {
     handlePrice();
   });
 
-  function confirmOrders(e) {
-    e.preventDefault();
-    Axios.post(url, {
-      email: data.email,
-      password: data.password,
-    }).then((res) => {
-      if (res.data.success == "True") {
-        let role = res.data.role;
-        alert("Logged in Successfully");
-        navigate("/navbarmain");
-      } else {
-        alert("Log in Failed");
-      }
-    });
-  }
-  
+  // const [productName, setProductName] = useState("");
+  // const [productQuantity, setProductQuantity] = useState("");
+  // const [productPrice, setProductPrice] = useState("");
+  // const [producttotalprice, setProductTotalPrice] = useState("");
+
+  // const confirmOrder = () => {
+  //   let orderDetail = JSON.parse(
+  //     `${localStorage.getItem("orderDetail") || "[]"}`
+  //   );
+
+  //   const date = new Date();
+  //   const gen_Id = date.getTime();
+
+  //   let payload = {
+  //     id: gen_Id,
+  //     name: productName,
+  //     quantity: productQuantity,
+  //     price: productPrice,
+  //     totalprice: producttotalprice,
+  //   };
+  //   // console.log("zzzzz", payload);
+
+  //   orderDetail.push(payload);
+
+  //   localStorage.setItem("orderDetail", JSON.stringify(orderDetail));
+  // };
+
+
+  // function confirmOrders(e) {
+  //   e.preventDefault();
+  //   Axios.post(url, {
+  //     email: data.email,
+  //     password: data.password,
+  //   }).then((res) => {
+  //     if (res.data.success == "True") {
+  //       let role = res.data.role;
+  //       alert("Logged in Successfully");
+  //       navigate("/navbarmain");
+  //     } else {
+  //       alert("Log in Failed");
+  //     }
+  //   });
+  // }
+
+  console.log("PRINTED PRODUCTS IN CART", cart)
+
   return (
     <article>
       {cart.map((item) => (
@@ -60,7 +90,11 @@ const Cart = ({ cart, setCart, handleChange }) => {
         <span>Total Price</span>
         <span>Rs - {price}</span>
       </div>
-      <button className="cnf-btn" onClick={() =>confirmOrders}>Confirm Order</button>
+      <button className="cnf-btn" >
+      {/* onClick={confirmOrder} */}
+        {/* onClick={() => confirmOrders} */}
+        Confirm Order
+      </button>
     </article>
   );
 };

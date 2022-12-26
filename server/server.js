@@ -192,6 +192,26 @@ app.post("/admin-login", function(req, res) {
   })();
 });
 
+app.post("/confirm-orders", function (req, res) {
+  const orders = req.body.orders;
+  (async function () {
+      let pool = await sql.connect(sqlConfig);
+      for(let i=0;i<orders.length;i++)
+      {
+          let result = await pool
+              .request()
+              .query(
+                  `insert into Orders values ('${orders[i].customername}', '${orders[i].productid}', '${orders[i].productname}', '${orders[i].quantity}', '${orders[i].price}')`,
+                  function (err, recordset) {
+                      console.log(recordset);
+                      if (err) console.log(err);
+                      res.send("Row iserted");
+                  }
+              );
+      }
+  })();
+});
+
 var server = app.listen(9000, function() {
   console.log("Server is running on localhost:9000");
 });
