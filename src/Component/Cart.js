@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "../Styles/cart.css";
 
 const Cart = ({ cart, setCart, handleChange }) => {
+
+  console.log("PRINTED PRODUCTS IN CART", cart)
+  
   // Hooks
   const [price, setPrice] = useState(0);
   
@@ -65,7 +68,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
   //   });
   // }
 
-  console.log("PRINTED PRODUCTS IN CART", cart)
+
 
   return (
     <article>

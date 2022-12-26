@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "../Styles/AdminLogin.css";
 
 function AdminLogin() {
+  const navigate = useNavigate();
   const url = "http://localhost:9000/admin-login";
   const [data, setData] = useState({
     email: "",
@@ -25,6 +27,7 @@ function AdminLogin() {
       if (res.data.success == "True") {
         let role = res.data.role;
         alert("Logged in Successfully");
+        navigate("/adminlogin");
       } else {
         alert("Log in Failed");
       }
