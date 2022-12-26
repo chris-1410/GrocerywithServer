@@ -2,12 +2,11 @@ import React, { useState, useEffect } from "react";
 import "../Styles/cart.css";
 
 const Cart = ({ cart, setCart, handleChange }) => {
+  console.log("PRINTED PRODUCTS IN CART", cart);
 
-  console.log("PRINTED PRODUCTS IN CART", cart)
-  
   // Hooks
   const [price, setPrice] = useState(0);
-  
+
   const handleRemove = (id) => {
     const arr = cart.filter((item) => item.id !== id);
     setCart(arr);
@@ -51,7 +50,6 @@ const Cart = ({ cart, setCart, handleChange }) => {
   //   localStorage.setItem("orderDetail", JSON.stringify(orderDetail));
   // };
 
-
   // function confirmOrders(e) {
   //   e.preventDefault();
   //   Axios.post(url, {
@@ -67,8 +65,6 @@ const Cart = ({ cart, setCart, handleChange }) => {
   //     }
   //   });
   // }
-
-
 
   return (
     <article>
@@ -93,8 +89,8 @@ const Cart = ({ cart, setCart, handleChange }) => {
         <span>Total Price</span>
         <span>Rs - {price}</span>
       </div>
-      <button className="cnf-btn" >
-      {/* onClick={confirmOrder} */}
+      <button className="cnf-btn">
+        {/* onClick={confirmOrder} */}
         {/* onClick={() => confirmOrders} */}
         Confirm Order
       </button>

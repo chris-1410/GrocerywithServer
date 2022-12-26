@@ -47,7 +47,7 @@ function AdminRegister() {
           onChange={(e) => onChange(e)}
           id="mobile"
           value={data.mobile}
-          type="text"
+          type="number"
         />
 
         <label htmlFor="email">Email Id</label>
