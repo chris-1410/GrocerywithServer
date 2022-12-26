@@ -15,7 +15,6 @@ function App() {
           <Route path="/userLogin" element={<UserMainComp />} />
           <Route path="/navbarmain" element={<NavBarMain />} />
         </Routes>
-        {/* <NavBarMain /> */}
       </Router>
     </div>
   );

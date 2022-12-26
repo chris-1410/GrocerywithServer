@@ -21,6 +21,22 @@ const Cart = ({ cart, setCart, handleChange }) => {
     handlePrice();
   });
 
+  function confirmOrders(e) {
+    e.preventDefault();
+    Axios.post(url, {
+      email: data.email,
+      password: data.password,
+    }).then((res) => {
+      if (res.data.success == "True") {
+        let role = res.data.role;
+        alert("Logged in Successfully");
+        navigate("/navbarmain");
+      } else {
+        alert("Log in Failed");
+      }
+    });
+  }
+  
   return (
     <article>
       {cart.map((item) => (
@@ -44,7 +60,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
         <span>Total Price</span>
         <span>Rs - {price}</span>
       </div>
-      <button className="cnf-btn">Confirm Order</button>
+      <button className="cnf-btn" onClick={() =>confirmOrders}>Confirm Order</button>
     </article>
   );
 };

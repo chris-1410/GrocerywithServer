@@ -25,7 +25,6 @@ function AdminLogin() {
       if (res.data.success == "True") {
         let role = res.data.role;
         alert("Logged in Successfully");
-        //navigate("/Admin");
       } else {
         alert("Log in Failed");
       }
