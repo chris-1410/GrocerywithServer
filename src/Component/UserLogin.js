@@ -47,6 +47,7 @@ function UserLogin() {
           showToastMessage1();
         }
       }
+      localStorage.setItem('email', data.email);
       toastMessage();
       if (res.data.success == "True") {
         let role = res.data.role;
