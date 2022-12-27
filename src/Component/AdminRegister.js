@@ -38,7 +38,7 @@ function AdminRegister() {
         <input
           onChange={(e) => onChange(e)}
           id="adminname"
-          value={data.name}
+          value={data.adminname}
           type="text"
         />
 
@@ -46,8 +46,8 @@ function AdminRegister() {
         <input
           onChange={(e) => onChange(e)}
           id="mobile"
-          value={data.description}
-          type="text"
+          value={data.mobile}
+          type="number"
         />
 
         <label htmlFor="email">Email Id</label>

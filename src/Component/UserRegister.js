@@ -39,7 +39,7 @@ function UserRegister() {
         <input
           onChange={(e) => onChange(e)}
           id="customername"
-          value={data.name}
+          value={data.customername}
           type="text"
         />
 
@@ -47,7 +47,7 @@ function UserRegister() {
         <input
           onChange={(e) => onChange(e)}
           id="mobile"
-          value={data.description}
+          value={data.mobile}
           type="text"
         />
 
