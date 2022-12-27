@@ -22,20 +22,20 @@ function ShowOrders() {
                 <thead className="thead-dark">
                     <tr>
                         <th scope="col">OrderId</th>
-                        <th scope="col">ProductId</th>
-                        <th scope="col">ProductName</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Price</th>
+                        <th scope="col">TotalPrice</th>
+                        <th scope="col">CustomerId</th>
+                        {/* <th scope="col">Quantity</th>
+                        <th scope="col">Price</th> */}
                     </tr>
                 </thead>
                 {data.map((ord) => (
                     <tbody className="table-data shadow-lg">
                         <tr>
                             <td>{ord.OrderId}</td>
-                            <td>{ord.ProductId} </td>
-                            <td>{ord.ProductName}</td>
-                            <td>{ord.Quantity}</td>
-                            <td>{ord.Price}</td>
+                            <td>{ord.TotalPrice} </td>
+                            <td>{ord.CustomerId}</td>
+                            {/* <td>{ord.Quantity}</td>
+                            <td>{ord.Price}</td> */}
                         </tr>
                     </tbody>
                 ))}
