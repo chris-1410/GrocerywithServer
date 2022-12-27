@@ -15,8 +15,6 @@ export const Cards = ({ item, handleClick }) => {
         <p>
           <i class="fa fa-inr"></i> {price}
         </p>
-        <button onClick={() => handleClick(item)}>Add to Cart</button>
-        {/* <span><i class="fa-solid fa-plus"></i></span> */}
       </div>
     </div>
   );

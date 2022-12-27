@@ -55,6 +55,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
     }
   };
 
+
   return (
     <article>
       {cart.map((item) => (
