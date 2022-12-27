@@ -18,7 +18,7 @@ export const Home = () => {
             </a>
 
             <a className="login-nav" href="/userLogin">
-              User
+              Customer
             </a>
           </div>
         </nav>

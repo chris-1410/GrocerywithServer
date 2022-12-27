@@ -19,15 +19,13 @@ var sqlConfig = {
   },
 };
 
-
-
 // display all available products to user
 app.get("/products-list", function(req, res) {
   (async function() {
     let pool = await sql.connect(sqlConfig);
     let result = await pool
       .request()
-      .query("select * from producttable", function(err, recordset) {
+      .query("select * from Products", function(err, recordset) {
         if (err) console.log(err);
         res.send(recordset.recordset);
       });
@@ -79,7 +77,7 @@ app.post("/user-register", function(req, res) {
     let result = await pool
       .request()
       .query(
-        `insert into Customers values ('${req.body.customername}', '${req.body.mobile}', '${req.body.email}', '${req.body.password}')`,
+        `insert into Customers values ('${req.body.customerid}', '${req.body.customername}', '${req.body.mobile}', '${req.body.email}', '${req.body.password}')`,
         function(err, recordset) {
           console.log(recordset);
           if (err) console.log(err);
@@ -186,23 +184,29 @@ app.post("/admin-login", function(req, res) {
 
 // Confirm Orders POST API
 app.post("/confirm-orders", function(req, res) {
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, content-type"
+  );
   const orders = req.body.orders;
+  const orderId = req.body.orderId;
   (async function() {
     let pool = await sql.connect(sqlConfig);
     for (let i = 0; i < orders.length; i++) {
       let result = await pool
         .request()
         .query(
-          `insert into Orders values ('${orders[i][0]}', '${orders[i][0]}', '${orders[i][1]}', '${orders[i][2]}', '${orders[i][3]}')`,
+          `insert into Orders values ('${orderId}', '${orders[i][0]}', '${orders[i][1]}', '${orders[i][2]}', '${orders[i][3]}')`,
           function(err, recordset) {
-            console.log(recordset);
+            console.log("Order Confirmed Check in DB", recordset);
             if (err) console.log(err);
-            res.send("Row iserted");
+            res.send("Order Confirmed Check in DB");
           }
         );
     }
   })();
 });
+
 
 var server = app.listen(9000, function() {
   console.log("Server is running on localhost:9000");

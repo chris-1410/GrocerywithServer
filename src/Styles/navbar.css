@@ -35,13 +35,14 @@ nav {
   color: black;
 }
 .cart span:nth-child(2) {
-  padding: 0 3px;
+  padding: 0 6px;
   background-color: #fd292f;
   color: white;
-  font-weight: bolx;
-  border-radius: 5px;
+  font-weight: bold;
+  border-radius: 36px;
   position: relative;
-  top: -15px;
+  top: -25px;
+  font-size: 20px;
 }
 .btn-logout {
   width: 70px;

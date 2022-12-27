@@ -25,7 +25,12 @@ const Cart = ({ cart, setCart, handleChange }) => {
   });
 
   let finalcart = [];
+
   const confirmOrder = () => {
+    let d = new Date();
+    let genId = d.getTime();
+    genId = "OID" + genId;
+
     for (let i = 0; i < cart.length; i++) {
       let id = cart[i].id;
       let name = cart[i].name;
@@ -39,14 +44,17 @@ const Cart = ({ cart, setCart, handleChange }) => {
         const url = "http://localhost:9000/confirm-orders";
         axios
           .post(url, {
+            orderId: genId,
             orders: finalcart,
           })
           .then((res) => {
             console.log(res.orders);
           });
+        finalcart = [];
       }
     }
   };
+
   return (
     <article>
       {cart.map((item) => (

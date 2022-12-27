@@ -4,6 +4,10 @@ import "../Styles/UserRegister.css";
 
 function UserRegister() {
   const url = "http://localhost:9000/user-register";
+  const d = new Date();
+  let genId = d.getTime();
+  genId = 'CID'+genId;
+
   const [data, setData] = useState({
     customername: "",
     mobile: "",
@@ -21,6 +25,7 @@ function UserRegister() {
   function submit(e) {
     e.preventDefault();
     Axios.post(url, {
+      customerid : genId,
       customername: data.customername,
       mobile: data.mobile,
       email: data.email,
@@ -32,7 +37,7 @@ function UserRegister() {
 
   return (
     <div className="div-user">
-      <p className="title">User Register</p>
+      <p className="title">Customer Register</p>
 
       <form className="user-form" onSubmit={(e) => submit(e)}>
         <label htmlFor="customername">Name</label>

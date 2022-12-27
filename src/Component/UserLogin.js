@@ -36,7 +36,7 @@ function UserLogin() {
 
   return (
     <div className="div-user-login">
-      <p className="title">User Login</p>
+      <p className="title">Customer Login</p>
 
       <form className="login-form-user" onSubmit={(e) => submit(e)}>
         <label htmlFor="email">Email Id</label>
