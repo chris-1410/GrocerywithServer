@@ -10,7 +10,7 @@ function UserLogin() {
   const url = "http://localhost:9000/user-login";
 
   const showToastMessage1 = () => {
-    toast.success("Login failed !", {
+    toast.error(" Invalid Password Login failed !", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };

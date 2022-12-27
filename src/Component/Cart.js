@@ -1,9 +1,29 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/cart.css";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Cart = ({ cart, setCart, handleChange }) => {
   console.log("PRINTED PRODUCTS IN CART", cart);
+
+  const showToastMessage1 = () => {
+    toast.success("Cart Cannot Be Empty !!!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  // const showToastMessage = () => {
+  //   toast.success("Order Confirmed !!!", {
+  //     position: toast.POSITION.TOP_RIGHT,
+  //   });
+  // };
+
+  const showToastMessage = () => {
+    toast.success("Order Confirmed !!!", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
 
   // Hooks
   const [price, setPrice] = useState(0);
@@ -78,9 +98,18 @@ const Cart = ({ cart, setCart, handleChange }) => {
             customerId: customerId,
           })
           .then((res) => {
+            function toastMessage() {
+              if (res.data.success == "True") {
+                showToastMessage();
+                alert("Order Confirmed !!! ");
+                console.log(res);
+              } else if (res.data.success == "False") {
+                showToastMessage1();
+              }
+            }
+            showToastMessage();
             console.log("orders-summary");
           });
-
         finalcart = [];
       }
     }
