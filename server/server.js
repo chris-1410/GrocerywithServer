@@ -19,15 +19,7 @@ var sqlConfig = {
   },
 };
 
-// const sqlConfig = {
-//   user: "ADF_SQL_server_Training_Chris",
-//   password: "Rathna@1964",
-//   server: "sqlserver--adf--training--chris.database.windows.net",
-//   database: "SQL-DB-adf-training-chris",
-//   options: {
-//     encrypt: true, // for azure
-//   },
-// };
+
 
 // display all available products to user
 app.get("/products-list", function(req, res) {
@@ -192,6 +184,7 @@ app.post("/admin-login", function(req, res) {
   })();
 });
 
+// Confirm Orders POST API
 app.post("/confirm-orders", function(req, res) {
   const orders = req.body.orders;
   (async function() {
@@ -200,7 +193,7 @@ app.post("/confirm-orders", function(req, res) {
       let result = await pool
         .request()
         .query(
-          `insert into Orders values ('${orders[i].customername}', '${orders[i].productid}', '${orders[i].productname}', '${orders[i].quantity}', '${orders[i].price}')`,
+          `insert into Orders values ('${orders[i][0]}', '${orders[i][0]}', '${orders[i][1]}', '${orders[i][2]}', '${orders[i][3]}')`,
           function(err, recordset) {
             console.log(recordset);
             if (err) console.log(err);
@@ -208,26 +201,6 @@ app.post("/confirm-orders", function(req, res) {
           }
         );
     }
-  })();
-});
-
-app.post("/confirm-orders", function (req, res) {
-  const orders = req.body.orders;
-  (async function () {
-      let pool = await sql.connect(sqlConfig);
-      for(let i=0;i<orders.length;i++)
-      {
-          let result = await pool
-              .request()
-              .query(
-                  `insert into Orders values ('${orders[i].customername}', '${orders[i].productid}', '${orders[i].productname}', '${orders[i].quantity}', '${orders[i].price}')`,
-                  function (err, recordset) {
-                      console.log(recordset);
-                      if (err) console.log(err);
-                      res.send("Row iserted");
-                  }
-              );
-      }
   })();
 });
 

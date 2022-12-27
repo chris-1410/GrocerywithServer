@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/cart.css";
+import axios from "axios";
 
 const Cart = ({ cart, setCart, handleChange }) => {
   console.log("PRINTED PRODUCTS IN CART", cart);
@@ -23,49 +24,29 @@ const Cart = ({ cart, setCart, handleChange }) => {
     handlePrice();
   });
 
-  // const [productName, setProductName] = useState("");
-  // const [productQuantity, setProductQuantity] = useState("");
-  // const [productPrice, setProductPrice] = useState("");
-  // const [producttotalprice, setProductTotalPrice] = useState("");
-
-  // const confirmOrder = () => {
-  //   let orderDetail = JSON.parse(
-  //     `${localStorage.getItem("orderDetail") || "[]"}`
-  //   );
-
-  //   const date = new Date();
-  //   const gen_Id = date.getTime();
-
-  //   let payload = {
-  //     id: gen_Id,
-  //     name: productName,
-  //     quantity: productQuantity,
-  //     price: productPrice,
-  //     totalprice: producttotalprice,
-  //   };
-  //   // console.log("zzzzz", payload);
-
-  //   orderDetail.push(payload);
-
-  //   localStorage.setItem("orderDetail", JSON.stringify(orderDetail));
-  // };
-
-  // function confirmOrders(e) {
-  //   e.preventDefault();
-  //   Axios.post(url, {
-  //     email: data.email,
-  //     password: data.password,
-  //   }).then((res) => {
-  //     if (res.data.success == "True") {
-  //       let role = res.data.role;
-  //       alert("Logged in Successfully");
-  //       navigate("/navbarmain");
-  //     } else {
-  //       alert("Log in Failed");
-  //     }
-  //   });
-  // }
-
+  let finalcart = [];
+  const confirmOrder = () => {
+    for (let i = 0; i < cart.length; i++) {
+      let id = cart[i].id;
+      let name = cart[i].name;
+      let quantity = cart[i].num;
+      let price = cart[i].price * cart[i].num;
+      let small = [id, name, quantity, price];
+      finalcart.push(small);
+      if (i == cart.length - 1) {
+        // callApi(finalcart)
+        console.log(finalcart);
+        const url = "http://localhost:9000/confirm-orders";
+        axios
+          .post(url, {
+            orders: finalcart,
+          })
+          .then((res) => {
+            console.log(res.orders);
+          });
+      }
+    }
+  };
   return (
     <article>
       {cart.map((item) => (
@@ -89,11 +70,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
         <span>Total Price</span>
         <span>Rs - {price}</span>
       </div>
-      <button className="cnf-btn">
-        {/* onClick={confirmOrder} */}
-        {/* onClick={() => confirmOrders} */}
-        Confirm Order
-      </button>
+      <button onClick={() => confirmOrder()}>Confirm Order</button>
     </article>
   );
 };
