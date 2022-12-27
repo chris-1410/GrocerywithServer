@@ -41,12 +41,14 @@ section {
   color: rgb(12, 11, 11);
 }
 .details button {
-  padding: 5px 10px;
+  width: 100px;
+  padding: 5px;
+  border-radius: 10px;
   border: none;
   font-weight: bold;
   color: white;
   margin-top: 10px;
-  background-color: #2F74C8;
+  background-color: #2f74c8;
   outline: none;
   cursor: pointer;
 }

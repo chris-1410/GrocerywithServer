@@ -14,7 +14,7 @@ export const NavBar = ({size, setShow}) => {
           </span>
           <span>{size}</span>
         </div>
-        <button type="button" className="btn-logout">Logout</button>
+        {/* <button type="button" className="btn-logout">Logout</button> */}
       </div>
     </nav>
   );
