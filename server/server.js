@@ -56,7 +56,7 @@ app.put("/update-quantity", function(req, res) {
     let result = await pool
       .request()
       .query(
-        `update products set ProductQuantity='${req.body.productquantity}' where ProductId='${req.body.productid}'`,
+        `update products set Quantity='${req.body.productquantity}' where Id='${req.body.productid}'`,
         function(err, recordset) {
           console.log(recordset);
           if (err) console.log(err);

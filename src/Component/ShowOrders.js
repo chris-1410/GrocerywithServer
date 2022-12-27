@@ -21,7 +21,7 @@ function ShowOrders() {
             <table className="table">
                 <thead className="thead-dark">
                     <tr>
-                        <th scope="col">CustomerName</th>
+                        <th scope="col">OrderId</th>
                         <th scope="col">ProductId</th>
                         <th scope="col">ProductName</th>
                         <th scope="col">Quantity</th>
@@ -31,7 +31,7 @@ function ShowOrders() {
                 {data.map((ord) => (
                     <tbody className="table-data shadow-lg">
                         <tr>
-                            <td>{ord.CustomerName}</td>
+                            <td>{ord.OrderId}</td>
                             <td>{ord.ProductId} </td>
                             <td>{ord.ProductName}</td>
                             <td>{ord.Quantity}</td>
