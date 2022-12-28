@@ -68,6 +68,7 @@ function UserLogin() {
           id="email"
           value={data.email}
           type="text"
+          placeholder="Email"
         />
 
         <label htmlFor="password">Password</label>
@@ -76,6 +77,7 @@ function UserLogin() {
           id="password"
           value={data.password}
           type="password"
+          placeholder="Password"
         />
 
         <button className="btn-user-login">Login</button>

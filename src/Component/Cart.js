@@ -87,6 +87,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
             customerId: customerId,
           })
           .then((res) => {
+            console.log(res)
             console.log("confirm-orders");
           });
 

@@ -47,7 +47,7 @@ function UserRegister() {
     ) {
       setErrorMessage("");
     } else {
-      setErrorMessage("Password Must be 8 characters Long !!!");
+      setErrorMessage("Password Must be 8 characters Long !!!  1 Uppercase 1 Lowercase 1 Number and a special Character ");
     }
   };
 
