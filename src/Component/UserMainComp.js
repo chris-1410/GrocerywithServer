@@ -1,16 +1,16 @@
 import React from "react";
-import UserRegister from "./UserRegister";
 import UserLogin from "./UserLogin";
-import "../Styles/UserMainComp.css";
+import "../Styles/AdminMain.css"
 
 export default function UserMainComp() {
   return (
     <div className="div-user-flex">
       <div>
-        <UserRegister />
+        {/* <UserRegister /> */}
       </div>
       <div>
         <UserLogin />
+        <a id="user-reg" href="/def" >Click to Register</a>
       </div>
     </div>
   );

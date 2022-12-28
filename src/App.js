@@ -7,16 +7,19 @@ import AdminView from "./Component/AdminView";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import AdminRegister from "./Component/AdminRegister";
+import UserRegister from "./Component/UserRegister";
 
 function App() {
   return (
     <div>
-      <Home path="/main"/>
+      <Home path="/main" />
       <ToastContainer />
       <Router>
         <Routes>
           <Route path="/admin" element={<AdminMainComp />} />
+          <Route path="/abc" element={<AdminRegister />} />
+          <Route path="/def" element={<UserRegister />} />
           <Route path="/adminlogin" element={<AdminView />} />
           <Route path="/userLogin" element={<UserMainComp />} />
           <Route path="/navbarmain" element={<NavBarMain />} />

@@ -45,6 +45,7 @@ function AdminLogin() {
           id="email"
           value={data.email}
           type="text"
+          placeholder="Email"
         />
 
         <label htmlFor="password">Password</label>
@@ -53,6 +54,7 @@ function AdminLogin() {
           id="password"
           value={data.password}
           type="password"
+           placeholder="Password"
         />
 
         <button className="btn-login">Login</button>

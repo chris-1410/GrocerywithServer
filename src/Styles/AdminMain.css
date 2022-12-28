@@ -1,5 +1,13 @@
-.div-admin-flex {
+/* .div-admin-flex {
     display: flex;
     justify-content: space-around;
+} */
+
+#admin-reg {
+    margin-left: 672px;
 }
+#user-reg {
+    margin-left: 672px;
+}
+
 
