@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const NavBar = ({ size, setShow }) => {
   const navigate = useNavigate();
   function logout() {
-    localStorage.clear()
+    localStorage.clear();
     navigate("/main");
     console.log("Clicked Logout !!!");
   }
