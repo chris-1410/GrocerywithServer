@@ -1,7 +1,14 @@
 import React from "react";
 import "../Styles/navbar.css";
+import { useNavigate } from "react-router-dom";
 
 export const NavBar = ({ size, setShow }) => {
+  const navigate = useNavigate();
+  function logout() {
+    localStorage.clear()
+    navigate("/main");
+    console.log("Clicked Logout !!!");
+  }
   return (
     <nav>
       <div className="nav-box">
@@ -14,7 +21,7 @@ export const NavBar = ({ size, setShow }) => {
             <span>{size}</span>
           </span>
         </div>
-        <button type="button" className="btn-logout">
+        <button type="button" className="btn-logout" onClick={logout}>
           Logout
         </button>
       </div>

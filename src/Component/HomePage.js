@@ -8,7 +8,7 @@ export const Home = () => {
       <hr />
       <div>
         <nav className="displayflex">
-          <a className="home-nav" href="/">
+          <a className="home-nav" href="/main">
             Home
           </a>
 

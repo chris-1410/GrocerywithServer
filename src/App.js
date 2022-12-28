@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <div>
-      <Home />
+      <Home path="/main"/>
       <ToastContainer />
       <Router>
         <Routes>
