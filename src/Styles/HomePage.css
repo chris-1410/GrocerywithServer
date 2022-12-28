@@ -48,3 +48,8 @@ a {
   border: 0;
   border-top: 1px solid rgba(0,0,0,.1);
 } */
+
+img{
+  width: 98%;
+  margin: 1rem 1rem;
+}

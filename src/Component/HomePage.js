@@ -23,6 +23,14 @@ export const Home = () => {
           </div>
         </nav>
       </div>
+
+      <div>
+        <img
+          src={
+            "https://lh3.googleusercontent.com/93-6i6wCrGd0ucOtmL6BhG94gWhPnu7Jw9cEQHAxbBHRXFvXhZJ70qUhmJekU3j1AqVnl3r_NeIWUdbyXdj34T5ZmQtOUNkzn-9e=s750"
+          }
+        />
+      </div>
     </div>
   );
 };
