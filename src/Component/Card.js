@@ -10,7 +10,7 @@ export const Cards = ({ item, handleClick }) => {
         <img src={image} />
       </div>
       <div className="details">
-        <p>Product Name: {name}</p>
+        <p>{name}</p>
         <p>Stock: {quantity}</p>
         <p>
           <i class="fa fa-inr"></i> {price}

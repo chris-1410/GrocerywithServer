@@ -8,16 +8,10 @@ const Cart = ({ cart, setCart, handleChange }) => {
   console.log("PRINTED PRODUCTS IN CART", cart);
 
   const showToastMessage1 = () => {
-    toast.success("Cart Cannot Be Empty !!!", {
-      position: toast.POSITION.TOP_RIGHT,
+    toast.error("Cart Cannot Be Empty !!!", {
+      position: toast.POSITION.TOP_CENTER,
     });
   };
-
-  // const showToastMessage = () => {
-  //   toast.success("Order Confirmed !!!", {
-  //     position: toast.POSITION.TOP_RIGHT,
-  //   });
-  // };
 
   const showToastMessage = () => {
     toast.success("Order Confirmed !!!", {
@@ -60,6 +54,9 @@ const Cart = ({ cart, setCart, handleChange }) => {
     getCustomerId();
   });
 
+  // iterate over the products in the cart.
+  // to get the quantity and total price of the products added in the cart.
+
   let finalcart = [];
   const confirmOrder = () => {
     let d = new Date();
@@ -99,22 +96,15 @@ const Cart = ({ cart, setCart, handleChange }) => {
             customerId: customerId,
           })
           .then((res) => {
-            function toastMessage() {
-              if (res.data.success == "True") {
-                showToastMessage();
-                alert("Order Confirmed !!! ");
-                console.log(res);
-              } else if (res.data.success == "False") {
-                showToastMessage1();
-              }
-            }
             showToastMessage();
-            console.log("orders-summary");
+            console.log("OrderID", genId);
+            console.log(cart.length);
           });
         finalcart = [];
-      }
+      } 
     }
   };
+
   return (
     <article>
       {cart.map((item) => (
