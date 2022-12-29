@@ -1,0 +1,36 @@
+body {
+  background-color: #c8eafc;
+  height: 98%;
+}
+.div-home {
+  border: 2px solid black;
+  margin: 4rem 2rem;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+  background-color: white;
+}
+
+img {
+  height: 86%;
+  width: 40%;
+}
+.top-nav {
+  display: flex;
+  border-top: 5px;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 600;
+}
+button{
+    border: none;
+    border-radius: 13px;
+    padding: 3px;
+}
