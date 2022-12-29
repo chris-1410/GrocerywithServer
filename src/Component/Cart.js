@@ -9,6 +9,12 @@ const Cart = ({ cart, setCart, handleChange }) => {
   const navigate = useNavigate();
   console.log("PRINTED PRODUCTS IN CART", cart);
 
+  const showToastMessage1 = () => {
+    toast.error(" CART CANNOT BE EMPTY !!!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
   const showToastMessage = () => {
     toast.success("Order Confirmed !!!", {
       position: toast.POSITION.TOP_RIGHT,
@@ -58,7 +64,9 @@ const Cart = ({ cart, setCart, handleChange }) => {
     let d = new Date();
     let genId = d.getTime();
     genId = "OID" + genId;
-
+    if (cart.length == 0) {
+      showToastMessage1();
+    }
     let totalPrice = 0;
     for (let i = 0; i < cart.length; i++) {
       let id = cart[i].id;
@@ -93,7 +101,6 @@ const Cart = ({ cart, setCart, handleChange }) => {
           })
           .then((res) => {
             showToastMessage();
-            navigate("/navbarmain");
             console.log("OrderID", genId);
             console.log(cart.length);
           });
