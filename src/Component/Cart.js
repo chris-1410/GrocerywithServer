@@ -3,15 +3,11 @@ import "../Styles/cart.css";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Cart = ({ cart, setCart, handleChange }) => {
+  const navigate = useNavigate();
   console.log("PRINTED PRODUCTS IN CART", cart);
-
-  const showToastMessage1 = () => {
-    toast.error("Cart Cannot Be Empty !!!", {
-      position: toast.POSITION.TOP_CENTER,
-    });
-  };
 
   const showToastMessage = () => {
     toast.success("Order Confirmed !!!", {
@@ -97,12 +93,15 @@ const Cart = ({ cart, setCart, handleChange }) => {
           })
           .then((res) => {
             showToastMessage();
+            navigate("/navbarmain");
             console.log("OrderID", genId);
             console.log(cart.length);
           });
         finalcart = [];
-      } 
+      }
     }
+    cart = [];
+    setCart([]);
   };
 
   return (

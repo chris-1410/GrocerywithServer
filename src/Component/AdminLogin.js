@@ -54,7 +54,7 @@ function AdminLogin() {
           id="password"
           value={data.password}
           type="password"
-           placeholder="Password"
+          placeholder="Password"
         />
 
         <button className="btn-login">Login</button>

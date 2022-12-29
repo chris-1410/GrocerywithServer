@@ -9,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminRegister from "./Component/AdminRegister";
 import UserRegister from "./Component/UserRegister";
+// import { Products } from "./Component/Products";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/adminlogin" element={<AdminView />} />
           <Route path="/userLogin" element={<UserMainComp />} />
           <Route path="/navbarmain" element={<NavBarMain />} />
+          {/* <Route path="/treat" element={<Products />} /> */}
         </Routes>
       </Router>
     </div>
