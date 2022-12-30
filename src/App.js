@@ -9,16 +9,16 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminRegister from "./Component/AdminRegister";
 import UserRegister from "./Component/UserRegister";
-// import { Products } from "./Component/Products";
+
 import { HomeScreen } from "./Component/HomeScreen";
 
 function App() {
   return (
     <div>
-      <HomeScreen />
+      <HomeScreen path="/home"/>
       {/* <Home path="/main" /> */}
       <ToastContainer />
-      {/* <Router>
+      <Router>
         <Routes>
           <Route path="/admin" element={<AdminMainComp />} />
           <Route path="/abc" element={<AdminRegister />} />
@@ -28,7 +28,7 @@ function App() {
           <Route path="/navbarmain" element={<NavBarMain />} />
       
         </Routes>
-      </Router> */}
+      </Router>
     </div>
   );
 }

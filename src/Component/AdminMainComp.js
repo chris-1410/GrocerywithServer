@@ -10,7 +10,7 @@ export default function AdminMainComp() {
       </div>
       <div className="div-register-login">
         <AdminLogin />
-        <a id="admin-reg" href="/abc" >Click to Register</a>
+        {/* <a id="admin-reg" href="/abc" >Click to Register</a> */}
       </div>
     </div>
   );
