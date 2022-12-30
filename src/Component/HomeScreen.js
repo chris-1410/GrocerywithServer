@@ -7,7 +7,7 @@ export const HomeScreen = () => {
     <React.Fragment>
       <div className="div-home">
         <nav className="top-nav">
-          <button href="/home">Home</button>
+          <button href="/main">Home</button>
           <button className="btn-login-home" href="/login">
             Login
           </button>
