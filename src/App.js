@@ -10,13 +10,13 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminRegister from "./Component/AdminRegister";
 import UserRegister from "./Component/UserRegister";
 
-import { HomeScreen } from "./Component/HomeScreen";
+// import { HomeScreen } from "./Component/HomeScreen";
 
 function App() {
   return (
     <div>
-      <HomeScreen path="/home"/>
-      {/* <Home path="/main" /> */}
+      {/* <HomeScreen path="/home"/> */}
+      <Home path="/main" />
       <ToastContainer />
       <Router>
         <Routes>
@@ -26,11 +26,12 @@ function App() {
           <Route path="/adminlogin" element={<AdminView />} />
           <Route path="/userLogin" element={<UserMainComp />} />
           <Route path="/navbarmain" element={<NavBarMain />} />
-      
         </Routes>
       </Router>
     </div>
   );
 }
-    {/* <Route path="/treat" element={<Products />} /> */}
+{
+  /* <Route path="/treat" element={<Products />} /> */
+}
 export default App;
