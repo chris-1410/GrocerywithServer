@@ -1,260 +1,154 @@
-var sql = require("mssql");
-const bodyParser = require("body-parser");
-var cors = require("cors");
-
-// connect to server
-var express = require("express");
-var app = express();
+const express = require("express");
+const cors = require("cors");
+const pool = require("./db");
+const app = express();
+const PORT = 9000;
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 
-// config for your database
-var sqlConfig = {
-  user: "Narendra",
-  password: "Naren@123",
-  server: "sql-server-jman-narendra.database.windows.net",
-  database: "sql-db-jman-narendra",
-  options: {
-    encrypt: true, // for azure
-  },
-};
-
-// display all available products to user
-app.get("/products-list", function(req, res) {
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query("select * from Products", function(err, recordset) {
-        if (err) console.log(err);
-        res.send(recordset.recordset);
-      });
-  })();
-});
-
-//display all received orders to admin
-app.get("/orders-list", function(req, res) {
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query("select * from Orderssummary", function(err, recordset) {
-        if (err) console.log(err);
-        res.send(recordset.recordset);
-      });
-  })();
-});
-
-//put (update) ProdtuctQuantity by admin
-app.put("/update-quantity", function(req, res) {
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, content-type"
-  );
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query(
-        `update products set Quantity='${req.body.productquantity}' where Id='${req.body.productid}'`,
-        function(err, recordset) {
-          console.log(recordset);
-          if (err) console.log(err);
-          res.send("Product quantity updated Check in DB");
-        }
-      );
-  })();
-});
-
-//new user register
-app.post("/user-register", function(req, res) {
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, content-type"
-  );
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query(
-        `insert into Customers values ('${req.body.customerid}', '${req.body.customername}', '${req.body.mobile}', '${req.body.email}', '${req.body.password}')`,
-        function(err, recordset) {
-          console.log(recordset);
-          if (err) console.log(err);
-          res.send("New User Registered Check in DB");
-        }
-      );
-  })();
-});
-
-//user login verification
-app.post("/user-login", function(req, res) {
-  const email = req.body.email;
-  const password = req.body.password;
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query(
-        `Select count(emailid) as count from customers where emailid = '${email}'`,
-        function(err, recordset) {
+// new user signup
+app.post("/signup", (req, res) => {
+  const user = req.body;
+  console.log("api called");
+  let selectQuery = `select count(email) from users where email='${user.email}'`;
+  pool.query(selectQuery, (err, result) => {
+    if (!err) {
+      console.log("inside if");
+      if (result.rows[0].count == 0) {
+        let insertQuery = `insert into users(name, email, password, role)
+                          values('${user.name}', '${user.email}', '${user.password}', 'user') `;
+        pool.query(insertQuery, (err, result1) => {
           if (!err) {
-            console.log(recordset.recordset[0].count);
-            if (recordset.recordset[0].count == 1) {
-              let passQuery = `Select password from customers where emailid = '${email}'`;
-
-              pool.query(passQuery, (err, result) => {
-                let passdb = result.recordset[0].password;
-                console.log(result);
-                if (passdb == password) {
-                  res.send({
-                    success: "True",
-                    password: result.recordset[0].password,
-                  });
-                } else {
-                  res.send({
-                    success: "False",
-                  });
-                }
-              });
-            }
+            res.send({ exists: "False", insert: "Insertion was successful" });
+          } else {
+            console.log(err.message);
           }
-        }
-      );
-  })();
-});
-
-//new admin register
-app.post("/admin-register", function(req, res) {
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, content-type"
-  );
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query(
-        `insert into admin values ('${req.body.adminname}', '${req.body.mobile}', '${req.body.email}', '${req.body.password}')`,
-        function(err, recordset) {
-          console.log(recordset);
-          if (err) console.log(err);
-          res.send("New Admin Registered Check in DB");
-        }
-      );
-  })();
-});
-
-//admin login authentication
-app.post("/admin-login", function(req, res) {
-  const email = req.body.email;
-  const password = req.body.password;
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query(
-        `Select count(emailid) as count from admin where emailid = '${email}'`,
-        function(err, recordset) {
-          if (!err) {
-            console.log(recordset.recordset[0].count);
-            if (recordset.recordset[0].count == 1) {
-              let passQuery = `Select password from admin where emailid = '${email}'`;
-
-              pool.query(passQuery, (err, result) => {
-                let passdb = result.recordset[0].password;
-                console.log(result.recordset[0]);
-                if (passdb == password) {
-                  res.send({
-                    success: "True",
-                    password: result.recordset[0].password,
-                  });
-                } else {
-                  res.send({
-                    success: "False",
-                  });
-                }
-              });
-            }
-          }
-        }
-      );
-  })();
-});
-
-// Confirm Orders POST API
-app.post("/confirm-orders", function(req, res) {
-  const orders = req.body.orders;
-  const orderId = req.body.orderId;
-  const customerId = req.body.customerId;
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    for (let i = 0; i < orders.length; i++) {
-      let result = await pool
-        .request()
-        .query(
-          `insert into Orders values ('${orderId}', '${orders[i][0]}', '${orders[i][1]}', '${orders[i][2]}', '${orders[i][3]}', '${customerId}')`,
-          function(err, recordset) {
-            console.log(recordset);
-            if (err) console.log(err);
-            // res.send("Row iserted");
-          }
-        );
+        });
+      } else {
+        console.log("inside else");
+        res.send({
+          exists: "True",
+        });
+      }
+    } else {
     }
-  })();
+  });
+  pool.end;
 });
 
-//orders-summary
-app.post("/orders-summary", function(req, res) {
-  const orderId = req.body.orderId;
-  const totalPrice = req.body.totalPrice;
-  const customerId = req.body.customerId;
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query(
-        `insert into OrdersSummary values ('${orderId}',  '${totalPrice}','${customerId}')`,
-        function(err, recordset) {
-          console.log(recordset);
-          if (err) console.log(err);
-          res.send("Row iserted");
-        }
-      );
-  })();
+//signin verification
+app.post("/signin", (req, res) => {
+  const user = req.body;
+  const email = user.email;
+  const password = user.password;
+  let passQuery = `Select password,role from users where email = '${email}'`;
+  pool.query(passQuery, (err, result1) => {
+    console.log(result1.rows);
+    if (result1.rows != 0) {
+      if (result1.rows[0].password == password) {
+        console.log(result1.rows);
+        res.send({
+          success: "True",
+          role: result1.rows[0].role,
+        });
+      } else {
+        // console.log(result1.rows);
+        res.send({
+          sucess: "False",
+        });
+      }
+    } else {
+      // console.log(result1.rows);
+      res.send({
+        sucess: "False",
+      });
+    }
+  });
 });
 
-//customer-id
-app.post("/customer-id", function(req, res) {
+//show products
+app.get("/products-list", (req, res) => {
+  let searchQuery = `Select * from products`;
+  pool.query(searchQuery, (err, result) => {
+    if (!err) {
+      res.send(result.rows);
+    } else {
+      console.log(err.message);
+    }
+  });
+});
+
+//show orders
+app.get("/orders-list", (req, res) => {
+  let searchQuery = `Select * from orders`;
+  pool.query(searchQuery, (err, result) => {
+    if (!err) {
+      res.send(result.rows);
+    } else {
+      console.log(err.message);
+    }
+  });
+});
+
+//update product quantity
+app.put("/update-quantity", (req, res) => {
+  let searchQuery = `update products set quantity='${req.body.productquantity}' where id='${req.body.productid}'`;
+  pool.query(searchQuery, (err, result) => {
+    if (!err) {
+      res.send("Product quantity updated Check in DB");
+    } else {
+      console.log(err.message);
+    }
+  });
+});
+
+//confirm-orders
+app.post("/confirm-orders", (req, res) => {
+  const orders = req.body.orders;
+  const total_price = req.body.total_price;
+  const user_id = req.body.user_id;
+  const order_id = Math.floor(Math.random() * 1200);
+  let insertQuery = `insert into orders_summary (order_id,total_price,order_date,user_id) values ('${order_id}','${total_price}',CURRENT_DATE,'${user_id}')`;
+  pool.query(insertQuery, (err, result) => {
+    if (!err) {
+      res.send("inserted");
+    } else {
+      console.log(err.message);
+    }
+  });
+  for (let i = 0; i < orders.length; i++) {
+    let searchQuery = `insert into orders (order_id,product_id,quantity,price,order_date,user_id) values ('${order_id}','${orders[i].product_id}','${orders[i].quantity}','${orders[i].price}',CURRENT_DATE,'${user_id}')`;
+    pool.query(searchQuery, (err, result) => {
+      if (!err) {
+        // res.send("inserted");
+      } else {
+        console.log(err.message);
+      }
+    });
+  }
+});
+
+//give user-id to the frontend
+app.post("/user-id", (req, res) => {
   const email = req.body.email;
-  (async function() {
-    let pool = await sql.connect(sqlConfig);
-    let result = await pool
-      .request()
-      .query(
-        `Select count(emailid) as count from customers where emailid = '${email}'`,
-        function(err, recordset) {
-          if (!err) {
-            console.log(recordset.recordset[0].count);
-            if (recordset.recordset[0].count == 1) {
-              let passQuery = `Select customerid from customers where emailid = '${email}'`;
-
-              pool.query(passQuery, (err, result) => {
-                let customerid = result.recordset[0].customerid;
-                console.log(result.recordset[0]);
-                if (true) {
-                  res.send({
-                    success: customerid,
-                  });
-                }
-              });
-            }
-          }
-        }
-      );
-  })();
+  let searchQuery = `Select count(email) from users where email = '${email}'`;
+  pool.query(searchQuery, (err, result) => {
+    if (!err) {
+      if (result.rows[0].count == 1) {
+        let passQuery = `Select user_id from users where email = '${email}'`;
+        pool.query(passQuery, (err, result1) => {
+          console.log(result1);
+          let user_id = result1.rows[0].user_id;
+          // console.log(user_id);
+          res.send({
+            success: user_id,
+          });
+        });
+      }
+    }
+  });
 });
 
-var server = app.listen(9000, function() {
-  console.log("Server is running on localhost:9000");
+app.listen(PORT, () => {
+  console.log("Server has started on port " + PORT);
 });

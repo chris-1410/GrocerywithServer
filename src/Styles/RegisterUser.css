@@ -74,59 +74,80 @@
   margin: 30px auto 10px;
 }
 
-/* .div-user-login {
+/* REFERENCE CSS */
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  background: #b3c6e1;
   display: flex;
-  justify-content: center;
   align-items: center;
-  flex-direction: column;
-  margin-top: 50px;
+  justify-content: center;
 }
 
-.title {
-  text-align: center;
-  width: 30vw;
-  background-color: rgb(190, 164, 214);
-  padding: 1vw 1vw;
-  border-radius: 10px 10px 0 0;
-  font-size: 2rem;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+.container form {
+  width: 90%;
+  max-width: 500px;
+  padding: 50px 30px 20px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
 }
 
-.login-form-user {
-  text-align: center;
+.input-group {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 30vw;
-  padding: 1vw 1vw;
-  background-color: rgb(250, 194, 194);
-  border-radius: 0 0 10px 10px;
+  align-items: center;
+  margin: 10px 0;
+  position: relative;
 }
 
-input {
-  border: 1px solid rgb(172, 171, 171);
-  border-radius: 10px;
-  padding: 1vw 1vw;
-  outline: none;
-  margin: 5px;
+.input-group label {
+  flex-basis: 30%;
 }
 
-.btn-user-login {
-  border: 1px solid rgb(172, 171, 171);
-  background-color: #2f74c8;
-  border-radius: 30px;
-  color: white;
+.input-group input {
+  flex-basis: 68%;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #999;
+  color: #333;
+  font-size: 16px;
+}
+
+::placeholder {
+  font-size: 14px;
+}
+
+.fa-paper-plane {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  font-size: 26px;
+  padding: 20px;
+  border-radius: 32px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.button {
+  background: #141a34;
+  color: #fff;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  padding: 10px 40px;
+  outline: 0;
   cursor: pointer;
-  width: 146px;
-  margin-left: 140px;
-  padding: 20px 50px 20px 40px;
-  font-weight: bold;
-  font-size: 20px;
-  margin-top: 30px;
-  outline: none;
-}
-
-label {
-  text-align: left;
-  margin-left: 6px;
+  display: block;
+  margin: 30px auto 10px;
 } */

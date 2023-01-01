@@ -20,12 +20,12 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path="/admin" element={<AdminMainComp />} />
-          <Route path="/abc" element={<AdminRegister />} />
-          <Route path="/def" element={<UserRegister />} />
-          <Route path="/adminlogin" element={<AdminView />} />
-          <Route path="/userLogin" element={<UserMainComp />} />
-          <Route path="/navbarmain" element={<NavBarMain />} />
+          {/* <Route path="/admin" element={<AdminMainComp />} /> */}
+          {/* <Route path="/abc" element={<AdminRegister />} /> */}
+          {/* <Route path="/def" element={<UserRegister />} /> */}
+          {/* <Route path="/adminlogin" element={<AdminView />} /> */}
+          {/* <Route path="/userLogin" element={<UserMainComp />} /> */}
+          {/* <Route path="/navbarmain" element={<NavBarMain />} /> */}
         </Routes>
       </Router>
     </div>
