@@ -5,6 +5,9 @@ const app = express();
 const PORT = 9000;
 app.use(cors());
 app.use(express.json());
+app.listen(PORT, () => {
+  console.log("Server has started on port " + PORT);
+});
 
 // new user signup
 app.post("/signup", (req, res) => {
@@ -48,7 +51,7 @@ app.post("/signin", (req, res) => {
       if (result1.rows[0].password == password) {
         console.log(result1.rows);
         res.send({
-          success: "True",
+          sucess: "True",
           role: result1.rows[0].role,
         });
       } else {
@@ -80,7 +83,7 @@ app.get("/products-list", (req, res) => {
 
 //show orders
 app.get("/orders-list", (req, res) => {
-  let searchQuery = `Select * from orders`;
+  let searchQuery = `Select * from orders_summary`;
   pool.query(searchQuery, (err, result) => {
     if (!err) {
       res.send(result.rows);
@@ -91,8 +94,8 @@ app.get("/orders-list", (req, res) => {
 });
 
 //update product quantity
-app.put("/update-quantity", (req, res) => {
-  let searchQuery = `update products set quantity='${req.body.productquantity}' where id='${req.body.productid}'`;
+app.post("/update-quantity", (req, res) => {
+  let searchQuery = `update products set quantity='${req.body.productquantity}' where product_id='${req.body.productid}'`;
   pool.query(searchQuery, (err, result) => {
     if (!err) {
       res.send("Product quantity updated Check in DB");
@@ -116,8 +119,9 @@ app.post("/confirm-orders", (req, res) => {
       console.log(err.message);
     }
   });
+
   for (let i = 0; i < orders.length; i++) {
-    let searchQuery = `insert into orders (order_id,product_id,quantity,price,order_date,user_id) values ('${order_id}','${orders[i].product_id}','${orders[i].quantity}','${orders[i].price}',CURRENT_DATE,'${user_id}')`;
+    let searchQuery = `insert into orders (order_id,product_id,quantity,price,order_date,user_id) values ('${order_id}','${orders[i][0]}','${orders[i][1]}','${orders[i][2]}',CURRENT_DATE,'${user_id}')`;
     pool.query(searchQuery, (err, result) => {
       if (!err) {
         // res.send("inserted");
@@ -149,6 +153,3 @@ app.post("/user-id", (req, res) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log("Server has started on port " + PORT);
-});

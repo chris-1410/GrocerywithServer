@@ -24,6 +24,7 @@ function ShowOrders() {
                         <th scope="col">OrderId</th>
                         <th scope="col">TotalPrice</th>
                         <th scope="col">CustomerId</th>
+                        <th scope="col">Order Date</th>
                         {/* <th scope="col">Quantity</th>
                         <th scope="col">Price</th> */}
                     </tr>
@@ -31,9 +32,10 @@ function ShowOrders() {
                 {data.map((ord) => (
                     <tbody className="table-data shadow-lg">
                         <tr>
-                            <td>{ord.OrderId}</td>
-                            <td>{ord.TotalPrice} </td>
-                            <td>{ord.CustomerId}</td>
+                            <td>{ord.order_id}</td>
+                            <td>{ord.total_price} </td>
+                            <td>{ord.user_id}</td>
+                            <td>{ord.order_date.split("T")[0]}</td>
                             {/* <td>{ord.Quantity}</td>
                             <td>{ord.Price}</td> */}
                         </tr>

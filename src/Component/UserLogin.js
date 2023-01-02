@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "../Styles/UserLogin.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function UserLogin() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const url = "http://localhost:9000/signin";
 
@@ -46,10 +46,13 @@ function UserLogin() {
       }
       localStorage.setItem("email", data.email);
       toastMessage();
-      if (res.data.success == "True") {
+      if (res.data.sucess == "True") {
         let role = res.data.role;
-        alert("Logged in Successfully");
-        // navigate("/navbarmain");
+        if (role == "user") {
+          navigate("/User");
+        } else if (role == "admin") {
+          navigate("/Admin");
+        }
       }
     });
   }

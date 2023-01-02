@@ -23,7 +23,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
 
   // Hooks
   const [price, setPrice] = useState(0);
-  const [customerId, setcustomerId] = useState();
+  const [userId, setuserId] = useState();
 
   const handleRemove = (id) => {
     const arr = cart.filter((item) => item.id !== id);
@@ -34,15 +34,15 @@ const Cart = ({ cart, setCart, handleChange }) => {
   function getCustomerId() {
     var x = localStorage.getItem("email");
 
-    const url2 = "http://localhost:9000/customer-id";
+    const url2 = "http://localhost:9000/user-id";
     axios
       .post(url2, {
         email: x,
       })
       .then((res) => {
-        setcustomerId(res.data.success);
+        setuserId(res.data.success);
       });
-    console.log("customerId " + customerId);
+    console.log("userId " + userId);
   }
 
   const handlePrice = () => {
@@ -61,20 +61,17 @@ const Cart = ({ cart, setCart, handleChange }) => {
 
   let finalcart = [];
   const confirmOrder = () => {
-    let d = new Date();
-    let genId = d.getTime();
-    genId = "OID" + genId;
+    
     if (cart.length == 0) {
       showToastMessage1();
     }
     let totalPrice = 0;
     for (let i = 0; i < cart.length; i++) {
       let id = cart[i].id;
-      let name = cart[i].name;
       let quantity = cart[i].num;
       let price = cart[i].price * cart[i].num;
       totalPrice += cart[i].price * cart[i].num;
-      let small = [id, name, quantity, price];
+      let small = [id, quantity, price];
       finalcart.push(small);
       if (i == cart.length - 1) {
         // callApi(finalcart)
@@ -83,27 +80,26 @@ const Cart = ({ cart, setCart, handleChange }) => {
         const url = "http://localhost:9000/confirm-orders";
         axios
           .post(url, {
-            orderId: genId,
             orders: finalcart,
-            customerId: customerId,
+            total_price: totalPrice,
+            user_id: userId,
           })
           .then((res) => {
             console.log(res);
             console.log("confirm-orders");
           });
 
-        const url3 = "http://localhost:9000/orders-summary";
-        axios
-          .post(url3, {
-            orderId: genId,
-            totalPrice: totalPrice,
-            customerId: customerId,
-          })
-          .then((res) => {
-            showToastMessage();
-            console.log("OrderID", genId);
-            console.log(cart.length);
-          });
+        // const url3 = "http://localhost:9000/orders-summary";
+        // axios
+        //   .post(url3, {
+        //     totalPrice: totalPrice,
+        //     userId: userId,
+        //   })
+        //   .then((res) => {
+        //     showToastMessage();
+        //     console.log("OrderID", genId);
+        //     console.log(cart.length);
+        //   });
         finalcart = [];
       }
     }

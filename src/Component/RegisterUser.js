@@ -59,7 +59,7 @@ function RegisterUser() {
     e.preventDefault();
     if (data.customername !== "" && data.email !== "" && data.password !== "") {
       Axios.post(url, {
-        customername: data.customername,
+        name: data.customername,
         email: data.email,
         password: data.password,
       }).then((res) => {

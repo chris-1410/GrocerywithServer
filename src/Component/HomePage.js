@@ -2,7 +2,7 @@ import React from "react";
 import "../Styles/HomePage.css";
 import img from "../images/HomePage.PNG";
 import UserLogin from "./UserLogin";
-import RegisterUser from "./RegisterUser";
+// import RegisterUser from "./RegisterUser";
 
 export const Home = () => {
   return (
