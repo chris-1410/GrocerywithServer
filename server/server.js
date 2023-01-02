@@ -9,9 +9,34 @@ app.listen(PORT, () => {
   console.log("Server has started on port " + PORT);
 });
 
+const crypto = require("crypto");
+const algorithm = "aes-256-cbc"; //Using AES encryption
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
+//Encrypting text
+function encrypt(text) {
+  let cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(key), iv);
+  let encrypted = cipher.update(text);
+  encrypted = Buffer.concat([encrypted, cipher.final()]);
+  return { iv: iv.toString("hex"), encryptedData: encrypted.toString("hex") };
+}
+
+// Decrypting text
+function decrypt(text) {
+  let iv = Buffer.from(text.iv, "hex");
+  let encryptedText = Buffer.from(text.encryptedData, "hex");
+  let decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(key), iv);
+  let decrypted = decipher.update(encryptedText);
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
+  return decrypted.toString();
+}
+
 // new user signup
 app.post("/signup", (req, res) => {
   const user = req.body;
+  var hw = encrypt(req.body.password);
+  const pass = hw.encryptedData;
   console.log("api called");
   let selectQuery = `select count(email) from users where email='${user.email}'`;
   pool.query(selectQuery, (err, result) => {
@@ -19,7 +44,7 @@ app.post("/signup", (req, res) => {
       console.log("inside if");
       if (result.rows[0].count == 0) {
         let insertQuery = `insert into users(name, email, password, role)
-                          values('${user.name}', '${user.email}', '${user.password}', 'user') `;
+                          values('${user.name}', '${user.email}', '${pass}', 'user') `;
         pool.query(insertQuery, (err, result1) => {
           if (!err) {
             res.send({ exists: "False", insert: "Insertion was successful" });
@@ -44,11 +69,12 @@ app.post("/signin", (req, res) => {
   const user = req.body;
   const email = user.email;
   const password = user.password;
+  var hw = encrypt(req.body.password)
   let passQuery = `Select password,role from users where email = '${email}'`;
   pool.query(passQuery, (err, result1) => {
     console.log(result1.rows);
     if (result1.rows != 0) {
-      if (result1.rows[0].password == password) {
+      if (result1.rows[0].password == hw.encryptedData) {
         console.log(result1.rows);
         res.send({
           success: "True",
@@ -152,4 +178,3 @@ app.post("/user-id", (req, res) => {
     }
   });
 });
-
