@@ -46,13 +46,15 @@ function UserLogin() {
       }
       localStorage.setItem("email", data.email);
       toastMessage();
-      if (res.data.sucess == "True") {
+      if (res.data.success == "True") {
         let role = res.data.role;
         if (role == "user") {
           navigate("/User");
         } else if (role == "admin") {
           navigate("/Admin");
         }
+      } else {
+        showToastMessage1();
       }
     });
   }

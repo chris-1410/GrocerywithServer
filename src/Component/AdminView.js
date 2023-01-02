@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import ShowOrders from "./ShowOrders";
 import Axios from "axios";
+import { useNavigate } from "react-router-dom";
+import "../Styles/Adminview.css";
 
 function AdminView() {
+
+  const navigate = useNavigate();
+  
+  function logout() {
+    navigate("/");
+    console.log("Clicked Logout !!!");
+  }
   const url = "http://localhost:9000/update-quantity";
 
   const [data, setData] = useState({
@@ -29,7 +38,14 @@ function AdminView() {
 
   return (
     <div className="form-container">
+      <nav className="admin-nav">
+        <h2>Admin Portal</h2>
+        <button className="btn-logout-home" onClick={logout}>
+          Logout
+        </button>
+      </nav>
       <form className="update-quantity" onSubmit={(e) => submit(e)}>
+        <br />
         <label>Product ID</label>
         <input
           onChange={(e) => onChange(e)}
@@ -48,6 +64,7 @@ function AdminView() {
 
         <input type="submit" />
       </form>
+      <br />
       <div>
         <ShowOrders />
       </div>

@@ -6,7 +6,7 @@ export const NavBar = ({ size, setShow }) => {
   const navigate = useNavigate();
   function logout() {
     localStorage.clear();
-    navigate("/main");
+    navigate("/");
     console.log("Clicked Logout !!!");
   }
   return (

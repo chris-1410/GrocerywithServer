@@ -14,10 +14,10 @@ function App() {
       <ToastContainer />
       <Router>
         <Routes>
-          <Route path="" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="/User" element={<NavBarMain />} />
           <Route path="/Admin" element={<AdminView />} />
-          <Route path="/RegUser" element={<RegisterUser />}/>
+          <Route path="/RegUser" element={<RegisterUser />} />
         </Routes>
       </Router>
     </div>

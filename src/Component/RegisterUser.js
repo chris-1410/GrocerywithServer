@@ -4,8 +4,14 @@ import "../Styles/RegisterUser.css";
 import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function RegisterUser() {
+  const navigate = useNavigate();
+  function loginnavigate() {
+    navigate("/");
+    console.log("Navigate to Login Screen !!!");
+  }
   const url = "http://localhost:9000/signup";
 
   const [data, setData] = useState({
@@ -125,7 +131,10 @@ function RegisterUser() {
           )}{" "}
         </div>
         <input class="button" type="submit" value="Register" name="Register" />
-        {/* <button className="btn-user">Register</button> */}
+
+        <button className="btn-user-login" onClick={loginnavigate}>
+          Login
+        </button>
       </form>
     </div>
   );

@@ -51,7 +51,7 @@ app.post("/signin", (req, res) => {
       if (result1.rows[0].password == password) {
         console.log(result1.rows);
         res.send({
-          sucess: "True",
+          success: "True",
           role: result1.rows[0].role,
         });
       } else {

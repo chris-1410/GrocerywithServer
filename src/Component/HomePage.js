@@ -2,13 +2,19 @@ import React from "react";
 import "../Styles/HomePage.css";
 import img from "../images/HomePage.PNG";
 import UserLogin from "./UserLogin";
-// import RegisterUser from "./RegisterUser";
+
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+  const navigate = useNavigate();
+  function registernavigate() {
+    navigate("/RegUser");
+    console.log("Navigate to Register Screen !!!");
+  }
   return (
     <div className="div-home">
       <nav className="top-nav">
-        <button className="btn-reg-home" href="/">
+        <button className="btn-reg-home" onClick={registernavigate}>
           Register
         </button>
       </nav>
@@ -18,7 +24,6 @@ export const Home = () => {
         </div>
         <div className="div-login">
           <UserLogin />
-          {/* <RegisterUser /> */}
         </div>
       </div>
     </div>
