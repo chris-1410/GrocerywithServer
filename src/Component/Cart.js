@@ -87,19 +87,9 @@ const Cart = ({ cart, setCart, handleChange }) => {
           .then((res) => {
             console.log(res);
             console.log("confirm-orders");
+            showToastMessage();
+            // navigate("/User");
           });
-
-        // const url3 = "http://localhost:9000/orders-summary";
-        // axios
-        //   .post(url3, {
-        //     totalPrice: totalPrice,
-        //     userId: userId,
-        //   })
-        //   .then((res) => {
-        //     showToastMessage();
-        //     console.log("OrderID", genId);
-        //     console.log(cart.length);
-        //   });
         finalcart = [];
       }
     }
