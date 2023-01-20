@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Axios from "axios";
 import "../Styles/UserLogin.css";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function UserLogin() {
@@ -37,20 +37,21 @@ function UserLogin() {
       password: data.password,
     }).then((res) => {
       function toastMessage() {
-        if (res.data.success == "True") {
+        if (res.data.success === "True") {
           showToastMessage();
           console.log(res);
-        } else if (res.data.success == "False") {
+        } else if (res.data.success === "False") {
           showToastMessage1();
         }
       }
       localStorage.setItem("email", data.email);
       toastMessage();
-      if (res.data.success == "True") {
+      if (res.data.sucess === "True") {
         let role = res.data.role;
-        if (role == "user") {
+        console.log(role);
+        if (role === "user") {
           navigate("/User");
-        } else if (role == "admin") {
+        } else if (role === "admin") {
           navigate("/Admin");
         }
       } else {
@@ -89,4 +90,3 @@ function UserLogin() {
   );
 }
 export default UserLogin;
-

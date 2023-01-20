@@ -5,9 +5,8 @@ import { useNavigate } from "react-router-dom";
 import "../Styles/Adminview.css";
 
 function AdminView() {
-
   const navigate = useNavigate();
-  
+
   function logout() {
     navigate("/");
     console.log("Clicked Logout !!!");

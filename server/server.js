@@ -5,46 +5,33 @@ const app = express();
 const PORT = 9000;
 app.use(cors());
 app.use(express.json());
+
 app.listen(PORT, () => {
   console.log("Server has started on port " + PORT);
 });
 
 const crypto = require("crypto");
-const algorithm = "aes-256-cbc"; //Using AES encryption
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
-
-//Encrypting text
-function encrypt(text) {
-  let cipher = crypto.createCipheriv("aes-256-cbc", Buffer.from(key), iv);
-  let encrypted = cipher.update(text);
-  encrypted = Buffer.concat([encrypted, cipher.final()]);
-  return { iv: iv.toString("hex"), encryptedData: encrypted.toString("hex") };
-}
-
-// Decrypting text
-function decrypt(text) {
-  let iv = Buffer.from(text.iv, "hex");
-  let encryptedText = Buffer.from(text.encryptedData, "hex");
-  let decipher = crypto.createDecipheriv("aes-256-cbc", Buffer.from(key), iv);
-  let decrypted = decipher.update(encryptedText);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-  return decrypted.toString();
-}
+var key = "abcdefghijklmnopqrstuvwx";
 
 // new user signup
 app.post("/signup", (req, res) => {
   const user = req.body;
-  var hw = encrypt(req.body.password);
-  const pass = hw.encryptedData;
+
+  const password = user.password;
+  var encrypt = crypto.createCipheriv("des-ede3", key, "");
+  var theCipher = encrypt.update(password, "utf8", "base64");
+  theCipher += encrypt.final("base64");
+  console.log(theCipher);
+
   console.log("api called");
+
   let selectQuery = `select count(email) from users where email='${user.email}'`;
   pool.query(selectQuery, (err, result) => {
     if (!err) {
       console.log("inside if");
       if (result.rows[0].count == 0) {
         let insertQuery = `insert into users(name, email, password, role)
-                          values('${user.name}', '${user.email}', '${pass}', 'user') `;
+                          values('${user.name}', '${user.email}', '${theCipher}', 'user') `;
         pool.query(insertQuery, (err, result1) => {
           if (!err) {
             res.send({ exists: "False", insert: "Insertion was successful" });
@@ -69,15 +56,22 @@ app.post("/signin", (req, res) => {
   const user = req.body;
   const email = user.email;
   const password = user.password;
-  var hw = encrypt(req.body.password)
+
   let passQuery = `Select password,role from users where email = '${email}'`;
+
   pool.query(passQuery, (err, result1) => {
-    console.log(result1.rows);
+    // console.log(result1.rows);
     if (result1.rows != 0) {
-      if (result1.rows[0].password == hw.encryptedData) {
+      let passdb = result1.rows[0].password;
+      var decrypt = crypto.createDecipheriv("des-ede3", key, "");
+      var s = decrypt.update(passdb, "base64", "utf8");
+      var decryptedData = s + decrypt.final("utf8");
+      console.log("s", s);
+      console.log("decryptedData", decryptedData);
+      if (decryptedData == password) {
         console.log(result1.rows);
         res.send({
-          success: "True",
+          sucess: "True",
           role: result1.rows[0].role,
         });
       } else {
@@ -120,8 +114,8 @@ app.get("/orders-list", (req, res) => {
 });
 
 //update product quantity
-app.post("/update-quantity", (req, res) => {
-  let searchQuery = `update products set quantity='${req.body.productquantity}' where product_id='${req.body.productid}'`;
+app.put("/update-quantity", (req, res) => {
+  let searchQuery = `update products set quantity='${req.body.productquantity}' where id='${req.body.productid}'`;
   pool.query(searchQuery, (err, result) => {
     if (!err) {
       res.send("Product quantity updated Check in DB");

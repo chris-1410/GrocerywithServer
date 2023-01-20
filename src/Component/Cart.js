@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../Styles/cart.css";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 const Cart = ({ cart, setCart, handleChange }) => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   console.log("PRINTED PRODUCTS IN CART", cart);
 
   const showToastMessage1 = () => {
@@ -61,8 +61,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
 
   let finalcart = [];
   const confirmOrder = () => {
-    
-    if (cart.length == 0) {
+    if (cart.length === 0) {
       showToastMessage1();
     }
     let totalPrice = 0;
@@ -73,7 +72,7 @@ const Cart = ({ cart, setCart, handleChange }) => {
       totalPrice += cart[i].price * cart[i].num;
       let small = [id, quantity, price];
       finalcart.push(small);
-      if (i == cart.length - 1) {
+      if (i === cart.length - 1) {
         // callApi(finalcart)
         console.log(finalcart);
 
